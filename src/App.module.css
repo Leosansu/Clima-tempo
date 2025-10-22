@@ -1,0 +1,277 @@
+.titulo {
+  text-align: center;
+  margin-top: 20px;
+  color: var(--text);
+}
+
+.tituloContainer {
+  display: flex;
+  align-items: center;
+  justify-content: center; /* centraliza horizontalmente junto com o título */
+  gap: 12px; /* espaço entre temperatura e título */
+  margin-top: 16px;
+}
+
+.temperaturaLocal {
+  font-size: 2.45rem; /* ajuste conforme desejar */
+  font-weight: 300; /* valor mais fino: 300 ou 400 */
+  color: var(--text);
+}
+
+/* Modo Dia */
+.modoDia {
+  /* theme tokens */
+  --bg: #ffffff;
+  --text: #333333;
+  --header-bg: #007bff;
+  --link: #ffffff;
+  --toggle-bg: rgba(57, 217, 242, 0.5);
+  --toggle-knob-bg: rgba(255, 255, 255, 0.5);
+  --toggle-active-bg: rgb(31, 53, 98);
+  --toggle-active-knob-border: #000000;
+
+  background-color: var(--bg);
+  color: var(--text);
+}
+
+/* Modo Noite */
+.modoNoite {
+  /* theme tokens */
+  --bg: #1a1a2e;
+  --text: #eaeaea;
+  --header-bg: #16213e;
+  --link: #eaeaea;
+  --toggle-bg: rgba(57, 217, 242, 0.3);
+  --toggle-knob-bg: rgba(255, 255, 255, 0.5);
+  --toggle-active-bg: rgb(31, 53, 98);
+  --toggle-active-knob-border: #000000;
+
+  background-color: var(--bg);
+  color: var(--text);
+}
+
+.formBusca {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  margin: 20px 0;
+}
+
+.inputBusca {
+  padding: 8px;
+  border-radius: 18px;
+  border: 1px solid #ccc;
+  min-width: 200px;
+}
+.inputBusca:focus {
+  outline: none; /* Remove o contorno padrão, se desejar */
+  border-color: #007bff; /* Cor da borda ao focar/clicar */
+  box-shadow: 0 0 0 2px rgba(0,123,255,0.2); /* Opcional: efeito de brilho */
+}
+
+.botaoBusca {
+  padding: 8px 16px;
+  border-radius: 8px;
+  border: none;
+  background: #007bff;
+  color: #fff;
+  cursor: pointer;
+  font-weight: bold;
+  transition: background 0.2s;
+  width: 110px; 
+}
+
+.botaoBusca:hover {
+  background: #0056b3;
+}
+
+@media (max-width: 500px) {
+  .formBusca {
+    flex-direction: column;
+    align-items: center; /* Alinha ao centro e não estica */
+    gap: 8px;
+  }
+  .botaoBusca {
+    width: auto;      /* Garante que o botão não ocupe toda a largura */
+    min-width: 70px; /* Opcional: define um tamanho mínimo */
+    align-self: center; /* Centraliza o botão */
+  }
+}
+
+/* App.module.css */
+.infoClima {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin-top: 24px;
+  gap: 6px;
+}
+
+.infoClima p {
+  margin: 0.15em 0;
+}
+
+/* fundos por condição (imagens em public/images/) */
+.bg_sunny {
+  background-image: url('/images/sunny.jpg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.bg_clouds {
+  background-image: url('/images/clouds.jpg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.bg_rain {
+  background-image: url('/images/rain.jpg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.bg_thunder {
+  background-image: url('/images/thunder.jpg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.bg_snow {
+  background-image: url('/images/snow.jpg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.bg_drizzle {
+  background-image: url('/images/drizzle.jpg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.bg_fog {
+  background-image: url('/images/fog.jpg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+/* garante que o container ocupa a tela inteira para mostrar a imagem */
+.modoDia, .modoNoite {
+  min-height: 100vh;
+  position: relative;
+}
+
+/* camada escura opcional para legibilidade do texto sobre imagens no modo dia */
+.modoDia::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: rgba(0,0,0,0.15); /* ajuste opacidade se precisar */
+  pointer-events: none;
+}
+
+/* opcional: camada escura para legibilidade (útil no modo noite) */
+.modoNoite::before,
+.bg_overlay::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: rgba(0,0,0,0.35);
+  pointer-events: none;
+}
+
+/* garanta que o container principal permita o background e não esconda conteúdo */
+:global(body) {
+  margin: 0;
+}
+.modoDia, .modoNoite {
+  position: relative;
+  min-height: 100vh;
+  background-color: var(--bg, #fff); /* fallback */
+}
+
+.ventoContainer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  margin-top: 8px;
+}
+
+/* círculo da bússola */
+.compass {
+  width: 70px;                 /* tamanho do "relógio" */
+  height: 70px;
+  border-radius: 50%;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(255,255,255,0.06);
+  box-shadow: 0 2px 6px rgba(0,0,0,0.15), inset 0 0 0 1px rgba(255,255,255,0.03);
+}
+
+/* anel - opcional para destacar borda */
+.compassRing {
+  position: absolute;
+  inset: 6px;
+  border-radius: 50%;
+  border: 2px solid rgba(255,255,255,0.06);
+  pointer-events: none;
+}
+
+/* rótulos N E S W */
+.compassLabels {
+  position: absolute;
+  inset: 0;
+  display: block;
+  pointer-events: none;
+  color: var(--text, #222);
+  font-weight: 700;
+  font-size: 0.7rem;
+}
+.compassLabels .north { position: absolute; top: 4px; left: 50%; transform: translateX(-50%); }
+.compassLabels .east  { position: absolute; right: 4px; top: 50%; transform: translateY(-50%); }
+.compassLabels .south { position: absolute; bottom: 4px; left: 50%; transform: translateX(-50%); }
+.compassLabels .west  { position: absolute; left: 4px; top: 50%; transform: translateY(-50%); }
+
+/* agulha apontando para direção do vento */
+.needle {
+  width: 3px;
+  height: 30px;
+  background: #ff3384;         /* cor rosa da agulha */
+  position: absolute;
+  top: 8px;                    /* posiciona ponta para cima */
+  left: 50%;
+  transform-origin: 50% 70%;   /* pivô para girar corretamente */
+  border-radius: 2px;
+  transition: transform 0.35s ease;
+  box-shadow: 0 1px 2px rgba(0,0,0,0.25);
+}
+
+/* ponto central para acabamento */
+.centerDot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--text, #222);
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  box-shadow: 0 1px 2px rgba(0,0,0,0.2);
+}
+
+/* adaptações responsivas */
+@media (max-width: 420px) {
+  .compass { width: 58px; height: 58px; }
+  .needle { height: 24px; width: 2.5px; top: 6px; }
+  .centerDot { width: 6px; height: 6px; }
+}

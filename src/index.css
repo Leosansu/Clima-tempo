@@ -1,0 +1,15 @@
+body {
+  margin: 0; /* Remove a margem padrão do body */
+  padding: 0; /* Remove o preenchimento padrão do body */
+  font-family: 'Calvin', sans-serif; /* Substitua 'Calvin' pelo nome correto da fonte */
+  font-size: 16px; /* Ajuste o tamanho conforme necessário */
+}
+
+
+a {
+  color: #1244fb;
+  text-decoration: none;
+}
+a:hover {
+  text-decoration: underline;
+}
