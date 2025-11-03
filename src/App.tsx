@@ -1,6 +1,9 @@
-import { useState } from 'react'
-import Header from './components/Header.tsx'
-import style from './App.module.css'
+import { useEffect, useState } from 'react'; // adicione useEffect na importação
+import style from './App.module.css';
+import Header from './components/Header.tsx';
+import SearchBar from './components/SearchBar';
+import WeatherTitle from './components/WeatherTitle';
+import WindIndicator from './components/WindIndicator';
 
 interface WeatherData {
   temperature: number
@@ -74,9 +77,9 @@ function App() {
         description: weatherData.weather[0].description,
         rain: weatherData.rain ? weatherData.rain['1h'] : null,
         humidity: weatherData.main.humidity
-      , weatherId: weatherData.weather[0].id
-      , windSpeed: weatherData.wind?.speed ?? 0    // salva velocidade do vento (m/s)
-      , windDeg: weatherData.wind?.deg ?? 0        // salva direção do vento (graus)
+        , weatherId: weatherData.weather[0].id
+        , windSpeed: weatherData.wind?.speed ?? 0    // salva velocidade do vento (m/s)
+        , windDeg: weatherData.wind?.deg ?? 0        // salva direção do vento (graus)
       })
 
       // calcular hora local usando dt + timezone (como já faz)
@@ -108,27 +111,67 @@ function App() {
     }
   }
 
-  // helper: converte weather id em classe de fundo (string correspondente ao CSS)
-  const getWeatherBgClass = (id?: number) => {
-    if (!id) return undefined
-    if (id === 800) return 'bg_sunny'
-    if (id >= 200 && id < 300) return 'bg_thunder'
-    if (id >= 300 && id < 400) return 'bg_drizzle'
-    if (id >= 500 && id < 600) return 'bg_rain'
-    if (id >= 600 && id < 700) return 'bg_snow'
-    if (id >= 700 && id < 800) return 'bg_fog'
-    // 801-804 nuvens
-    return 'bg_clouds'
+  // helper: converte weather id em classe de fundo (accept id ou descrição)
+  const getWeatherBgClass = (id?: number, desc?: string) => {
+    if (typeof id === 'number') {
+      if (id === 800) return 'bg_sunny'
+      if (id === 500) return 'bg_chuvaLeve'        // chuva leve -> chuvaLeve.jpg
+      if (id >= 200 && id < 300) return 'bg_thunder'
+      if (id >= 300 && id < 400) return 'bg_drizzle'
+      if (id >= 500 && id < 600) return 'bg_rain'
+      if (id >= 600 && id < 700) return 'bg_snow'
+      if (id >= 700 && id < 800) return 'bg_fog'
+      if (id === 801 || id === 802) return 'bg_clouds'
+      if (id === 803 || id === 804) return 'bg_drizzle'
+      return 'bg_clouds'
+    }
+
+    const d = (desc ?? '').toLowerCase()
+    if (d.includes('chuva leve') || d.includes('light rain')) return 'bg_chuvaLeve' // fallback textual
+    if (d.includes('nuvens dispersas') || d.includes('algumas nuvens') || d.includes('few clouds') || d.includes('scattered')) return 'bg_clouds'
+    if (d.includes('nublado') || d.includes('broken clouds') || d.includes('overcast')) return 'bg_drizzle'
+    if (d.includes('névoa') || d.includes('neblina') || d.includes('bruma') || d.includes('fog') || d.includes('mist')) return 'bg_fog'
+    if (d.includes('chuva') || d.includes('chuvoso') || d.includes('rain')) return 'bg_rain'
+    if (d.includes('trovoada') || d.includes('tempestade') || d.includes('thunder')) return 'bg_thunder'
+    if (d.includes('ensolarado') || d.includes('céu limpo') || d.includes('clear')) return 'bg_sunny'
+    if (d.includes('neve') || d.includes('snow')) return 'bg_snow'
+    if (d.includes('chuvisco') || d.includes('drizzle')) return 'bg_drizzle'
+    return undefined
   }
 
-  // aplicar imagem de fundo apenas no modo dia
-  const bgCssClass = (!modoNoite && weather?.weatherId) ? style[getWeatherBgClass(weather.weatherId) as string] : ''
+  const resolvedClassName = getWeatherBgClass(weather?.weatherId, weather?.description)
+  const bgCssClass = (!modoNoite && weather && resolvedClassName)
+    ? style[resolvedClassName as string]
+    : ''
+
+  console.log('DBG: weatherId, desc =>', weather?.weatherId, weather?.description)
+  console.log('DBG: getWeatherBgClass =>', resolvedClassName)
+  console.log('DBG: resolved style class =>', bgCssClass)
+
+  const bgInline = (!modoNoite && weather && resolvedClassName && !style[resolvedClassName as string])
+    ? { backgroundImage: `url('/images/${resolvedClassName.replace('bg_', '')}.jpg')`, backgroundSize: 'cover', backgroundPosition: 'center' }
+    : undefined
 
   // Para pegar a hora atual:
   const horaAtual = new Date().toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit' })
 
+  useEffect(() => {
+    // atualiza title quando houver dados de clima; fallback para título base
+    if (weather) {
+      const temp = Math.round(weather.temperature)
+      const desc = weather.description ?? ''
+      const place = busca || '' // nome da cidade resolvida exibida no header
+      document.title = `${temp}°C — ${desc}${place ? ` | ${place}` : ''} | Projeto Clima`
+    } else {
+      document.title = 'Condições climáticas — Projeto Clima'
+    }
+  }, [weather, busca]) // roda quando weather ou busca mudarem
+
   return (
-    <div className={`${modoNoite ? style.modoNoite : style.modoDia} ${bgCssClass}`}>
+    <div
+      className={`${modoNoite ? style.modoNoite : style.modoDia} ${bgCssClass}`}
+      style={bgInline}
+    >
       <Header
         modoNoite={modoNoite}
         alternarModoNoite={alternarModoNoite}
@@ -137,30 +180,26 @@ function App() {
         data={dataCidade ? dataCidade : undefined}   // passa a data formatada para o Header
       />
 
-      {/* Agrupa temperatura + título */}
-      <div className={style.tituloContainer}>
-        {weather ? (                                      // se há dados do clima, mostra temperatura + descrição
-          <>
-            <span className={style.temperaturaLocal}>{Math.round(weather.temperature)}°C</span>
-            <h1 className={style.titulo}>{weather.description}</h1>
-          </>
-        ) : (                                            // caso contrário, texto padrão ao entrar no app
-          <h1 className={style.titulo}>Condições climáticas</h1>
-        )}
-      </div>
+      <WeatherTitle
+        temperature={weather?.temperature}
+        description={weather?.description}
+        classes={{
+          container: style.tituloContainer,
+          temp: style.temperaturaLocal,
+          title: style.titulo,
+        }}
+      />
 
-      <form onSubmit={handleSubmit} className={style.formBusca}>
-        <input
-          type="text"
-          value={cidade}
-          onChange={e => setCidade(e.target.value)}
-          placeholder="Digite o nome da cidade"
-          className={style.inputBusca}
-        />
-        <button type="submit" className={style.botaoBusca}>Buscar</button>
-      </form>
-      {loading && <p>Carregando...</p>}
-      {erro && <p style={{ color: 'red' }}>{erro}</p>}
+      <SearchBar
+        cidade={cidade}
+        onCidadeChange={setCidade}
+        onSubmit={handleSubmit}
+        loading={loading}
+        erro={erro}
+        className={style.formBusca}
+        inputClassName={style.inputBusca}
+        buttonClassName={style.botaoBusca}
+      />
       {weather && (
         <div className={style.infoClima}>
           <p>Mínima: <strong>{weather.tempMin}°C</strong></p>
@@ -173,30 +212,25 @@ function App() {
 
       {/* Indicador de vento: bússola + velocidade (aparece quando houver weather) */}
       {weather && (
-        <div className={style.ventoContainer} aria-hidden={false}>
-          <div className={style.compass} title={`Direção do vento: ${weather.windDeg}°`}>
-            <div className={style.compassRing} />                    {/* anel externo */}
-            <div className={style.compassLabels}>                   {/* N E S W */}
-              <span className={style.north}>N</span>
-              <span className={style.east}>E</span>
-              <span className={style.south}>S</span>
-              <span className={style.west}>W</span>
-            </div>
-            <div
-              className={style.needle}
-              style={{ transform: `rotate(${weather.windDeg ?? 0}deg)` }} // gira agulha conforme windDeg
-            />
-            <div className={style.centerDot} />                       {/* ponto central */}
-          </div>
-          <div className={style.ventoInfo}>
-            <div className={style.ventoVelocidade}>
-              {(weather.windSpeed ?? 0).toFixed(1)} m/s
-            </div>
-            <div className={style.ventoVelocidadeSmall}>
-              ({Math.round((weather.windSpeed ?? 0) * 3.6)} km/h)
-            </div>
-          </div>
-        </div>
+        <WindIndicator
+          deg={weather.windDeg ?? 0}
+          speed={weather.windSpeed ?? 0}
+          classes={{
+            container: style.ventoContainer,
+            compass: style.compass,
+            compassRing: style.compassRing,
+            compassLabels: style.compassLabels,
+            north: style.north,
+            east: style.east,
+            south: style.south,
+            west: style.west,
+            needle: style.needle,
+            centerDot: style.centerDot,
+            info: style.ventoInfo,
+            velocidade: style.ventoVelocidade,
+            velocidadeSmall: style.ventoVelocidadeSmall,
+          }}
+        />
       )}
     </div>
   )

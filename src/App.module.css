@@ -149,14 +149,14 @@
 }
 
 .bg_drizzle {
-  background-image: url('/images/drizzle.jpg');
+  background-image: url('/images/drizzle.jpg'); /* imagem para "nublado" conforme solicitado */
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
 }
 
 .bg_fog {
-  background-image: url('/images/fog.jpg');
+  background-image: url('/images/fog.jpg'); /* confirme o nome do arquivo */
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;

@@ -1,75 +1,73 @@
-# React + TypeScript + Vite
+# Projeto Clima — React + TypeScript + Vite
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+![Capa do projeto](.public\images\CapaApp.png)
 
-Currently, two official plugins are available:
+Descrição
+- Aplicação de previsão do tempo que usa a API OpenWeatherMap. Resolve ambiguidade de cidades com geocoding e apresenta: temperatura, condição, mín/máx, umidade, chuva, vento (direção/velocidade), data/hora local e fundo visual dinâmico conforme a condição climática.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+Demo
+- URL (substitua pela URL pública do deploy): https://seu-app.vercel.app  
+- GIF demonstrativo: ./public/images/demo.gif
 
-## React Compiler
+Principais funcionalidades
+- Busca por cidade com geocoding (evita ambiguidade, ex.: "Roma, IT").  
+- Exibição: temperatura atual, mínima, máxima e descrição em português.  
+- Hora e data local da cidade (usando dt + timezone da API).  
+- Fundo dinâmico conforme o código do clima (7 imagens em public/images).  
+- Indicador de vento: bússola com agulha apontando a direção e velocidade (m/s e km/h).  
+- Modo dia/noite com visual distinto.  
+- Tratamento de erros e indicador de carregamento.
 
-The React Compiler is enabled on this template. See [this documentation](https://react.dev/learn/react-compiler) for more information.
+Tecnologias
+- React + TypeScript  
+- Vite  
+- OpenWeatherMap API  
+- CSS Modules
 
-Note: This will impact Vite dev & build performances.
+Capturas de tela
+- Tela inicial: ./public/images/screenshot.png  
+- Resultado com clima: ./public/images/screenshot-weather.png
 
-## Expanding the ESLint configuration
+Instalação (local)
+1. Clone o repositório:
+   git clone <URL-do-repo>
+2. Entre na pasta:
+   cd projeto_react_clima
+3. Instale dependências:
+   npm install
+4. Crie arquivo `.env` na raiz com sua chave (não commitar):
+   `VITE_OPENWEATHER_KEY=SEU_API_KEY_AQUI`
+5. Rodar em dev:
+   npm run dev
+6. Build:
+   npm run build
+7. Preview do build:
+   npm run preview
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+Segurança da API key
+- Nunca comite a chave pública. Use `.env` e inclua `.env` no `.gitignore`.  
+- Para produção, avalie mover chamadas que usam a key para um backend (evita expor a key no bundle).
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+Deploy (dica rápida - Vercel)
+1. Suba o código no GitHub.  
+2. No Vercel: New Project → Import Git Repository → selecione o repositório.  
+3. Configure variável de ambiente `VITE_OPENWEATHER_KEY` em Environment Variables.  
+4. Deploy será automático a cada push na branch configurada.
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+Como apresentar no portfólio / LinkedIn
+- Contextualize o problema: ambiguidade de cidades e fuso horário.  
+- Mostre o fluxo: busca → resultado → mudança de fundo → bússola de vento.  
+- Destaque decisões técnicas: por que usar geocoding; por que calcular hora com dt+timezone; uso de CSS Modules e Vite.  
+- Aponte melhorias futuras: cache das respostas, previsão horária, PWA, mover chamadas sensíveis para backend.  
+- Inclua links diretos para demo, repositório e imagens/GIFs nos posts.
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+Contribuição
+- Pull requests são bem-vindos. Abra uma issue para discutir mudanças maiores.
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+Contato
+- Leonam Suertegaray Santorum — leosuerte@gmail.com  
+- GitHub: https://github.com/Leosansu
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+Observações finais
+- Substitua os links e screenshots antes de publicar.  
+- Não publique chaves no repositório público — gere e adicione a variável de ambiente no serviço de hospedagem.
