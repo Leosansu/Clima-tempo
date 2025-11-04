@@ -153,7 +153,7 @@ function App() {
     : undefined
 
   // Para pegar a hora atual:
-  const horaAtual = new Date().toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit' })
+  
 
   useEffect(() => {
     // atualiza title quando houver dados de clima; fallback para título base
