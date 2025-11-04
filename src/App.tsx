@@ -180,58 +180,60 @@ function App() {
         data={dataCidade ? dataCidade : undefined}   // passa a data formatada para o Header
       />
 
-      <WeatherTitle
-        temperature={weather?.temperature}
-        description={weather?.description}
-        classes={{
-          container: style.tituloContainer,
-          temp: style.temperaturaLocal,
-          title: style.titulo,
-        }}
-      />
-
-      <SearchBar
-        cidade={cidade}
-        onCidadeChange={setCidade}
-        onSubmit={handleSubmit}
-        loading={loading}
-        erro={erro}
-        className={style.formBusca}
-        inputClassName={style.inputBusca}
-        buttonClassName={style.botaoBusca}
-      />
-      {weather && (
-        <div className={style.infoClima}>
-          <p>Mínima: <strong>{weather.tempMin}°C</strong></p>
-          <p>Máxima: <strong>{weather.tempMax}°C</strong></p>
-          <p>Condição: <strong>{weather.description}</strong></p>
-          <p>Umidade: <strong>{weather.humidity}%</strong></p>
-          {weather.rain !== null && <p>Chuva (última hora): <strong>{weather.rain} mm</strong></p>}
-        </div>
-      )}
-
-      {/* Indicador de vento: bússola + velocidade (aparece quando houver weather) */}
-      {weather && (
-        <WindIndicator
-          deg={weather.windDeg ?? 0}
-          speed={weather.windSpeed ?? 0}
+      <div className={style.main}>
+        <WeatherTitle
+          temperature={weather?.temperature}
+          description={weather?.description}
           classes={{
-            container: style.ventoContainer,
-            compass: style.compass,
-            compassRing: style.compassRing,
-            compassLabels: style.compassLabels,
-            north: style.north,
-            east: style.east,
-            south: style.south,
-            west: style.west,
-            needle: style.needle,
-            centerDot: style.centerDot,
-            info: style.ventoInfo,
-            velocidade: style.ventoVelocidade,
-            velocidadeSmall: style.ventoVelocidadeSmall,
+            container: style.tituloContainer,
+            temp: style.temperaturaLocal,
+            title: style.titulo,
           }}
         />
-      )}
+
+        <SearchBar
+          cidade={cidade}
+          onCidadeChange={setCidade}
+          onSubmit={handleSubmit}
+          loading={loading}
+          erro={erro}
+          className={style.formBusca}
+          inputClassName={style.inputBusca}
+          buttonClassName={style.botaoBusca}
+        />
+        {weather && (
+          <div className={style.infoClima}>
+            <p>Mínima: <strong>{weather.tempMin}°C</strong></p>
+            <p>Máxima: <strong>{weather.tempMax}°C</strong></p>
+            <p>Condição: <strong>{weather.description}</strong></p>
+            <p>Umidade: <strong>{weather.humidity}%</strong></p>
+            {weather.rain !== null && <p>Chuva (última hora): <strong>{weather.rain} mm</strong></p>}
+          </div>
+        )}
+
+        {/* Indicador de vento: bússola + velocidade (aparece quando houver weather) */}
+        {weather && (
+          <WindIndicator
+            deg={weather.windDeg ?? 0}
+            speed={weather.windSpeed ?? 0}
+            classes={{
+              container: style.ventoContainer,
+              compass: style.compass,
+              compassRing: style.compassRing,
+              compassLabels: style.compassLabels,
+              north: style.north,
+              east: style.east,
+              south: style.south,
+              west: style.west,
+              needle: style.needle,
+              centerDot: style.centerDot,
+              info: style.ventoInfo,
+              velocidade: style.ventoVelocidade,
+              velocidadeSmall: style.ventoVelocidadeSmall,
+            }}
+          />
+        )}
+      </div>
     </div>
   )
 }

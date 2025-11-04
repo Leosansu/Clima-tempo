@@ -1,6 +1,6 @@
 # Projeto Clima — React + TypeScript + Vite
 
-![Capa do projeto](.public\images\CapaApp.png)
+![Capa do projeto](./public/images/CapaApp.png)
 
 Descrição
 - Aplicação de previsão do tempo que usa a API OpenWeatherMap. Resolve ambiguidade de cidades com geocoding e apresenta: temperatura, condição, mín/máx, umidade, chuva, vento (direção/velocidade), data/hora local e fundo visual dinâmico conforme a condição climática.

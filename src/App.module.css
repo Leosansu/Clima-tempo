@@ -195,6 +195,16 @@
   position: relative;
   min-height: 100vh;
   background-color: var(--bg, #fff); /* fallback */
+  display: flex;             /* permite centralizar o conteúdo principal */
+  flex-direction: column;    /* mantém Header no topo */
+}
+
+.main {
+  flex: 1;                   /* ocupa o espaço restante abaixo do Header */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;   /* centraliza verticalmente */
+  align-items: center;       /* centraliza horizontalmente */
 }
 
 .ventoContainer {
