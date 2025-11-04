@@ -68,13 +68,6 @@ Aplicação de previsão do tempo que usa a API OpenWeatherMap. Resolve ambiguid
 3. Configure a variável `VITE_OPENWEATHER_KEY` em Environment Variables.
 4. Deploy automático a cada push na branch configurada.
 
-## Como apresentar (portfólio / LinkedIn)
-- Contextualize o problema: ambiguidade de cidades e fuso horário.
-- Mostre o fluxo: busca → resultado → mudança de fundo → bússola de vento.
-- Destaque decisões técnicas: geocoding para desambiguar; hora calculada com `dt + timezone`; CSS Modules; Vite.
-- Melhores próximas etapas: cache de respostas, previsão horária/diária, PWA, mover chamadas sensíveis para backend.
-- Inclua links diretos para demo, repositório e imagens/GIFs.
-
 ## Contribuição
 - Pull requests são bem-vindos. Abra uma issue para discutir mudanças maiores.
 

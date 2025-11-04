@@ -8,9 +8,9 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 10px 20px;
+  padding: 10px 24px;
   margin: 0;
-  height: auto;         /* usar auto + padding é mais flexível que fixed height */
+  height: auto;         
   gap: 12px;
 }
 
