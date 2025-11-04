@@ -10,7 +10,8 @@
   align-items: center;
   padding: 10px 20px;
   margin: 0;
-  height: 20px;
+  height: auto;         /* usar auto + padding é mais flexível que fixed height */
+  gap: 12px;
 }
 
 .header h1 {
