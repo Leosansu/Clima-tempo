@@ -13,7 +13,7 @@ function App() {
   const [cidade, setCidade] = useState('')
 
   // estados e lógica de clima agora vêm do hook
-  const { weather, loading, erro, horaCidade, dataCidade, buscarClima } = useWeather()
+  const { weather, loading, erro, horaCidade, dataCidade, buscarClima, pais } = useWeather()
 
   const alternarModoNoite = () => setModoNoite(!modoNoite)
 
@@ -80,55 +80,58 @@ function App() {
         modoNoite={modoNoite}
         alternarModoNoite={alternarModoNoite}
         cidade={busca ? busca : undefined}
+        pais={pais}
         hora={horaCidade ? horaCidade : undefined}
         data={dataCidade ? dataCidade : undefined}
       />
 
       <div className={style.main}>
-        <WeatherTitle
-          temperature={weather?.temperature}
-          description={weather?.description}
-          classes={{
-            container: style.tituloContainer,
-            temp: style.temperaturaLocal,
-            title: style.titulo,
-          }}
-        />
-
-        <SearchBar
-          cidade={cidade}
-          onCidadeChange={setCidade}
-          onSubmit={handleSubmit}
-          loading={loading}
-          erro={erro}
-          className={style.formBusca}
-          inputClassName={style.inputBusca}
-          buttonClassName={style.botaoBusca}
-        />
-
-        {weather && <WeatherInfo weather={weather} />}
-
-        {weather && (
-          <WindIndicator
-            deg={weather.windDeg ?? 0}
-            speed={weather.windSpeed ?? 0}
+        <div className={style.infoWrapper}>
+          <WeatherTitle
+            temperature={weather?.temperature}
+            description={weather?.description}
             classes={{
-              container: style.ventoContainer,
-              compass: style.compass,
-              compassRing: style.compassRing,
-              compassLabels: style.compassLabels,
-              north: style.north,
-              east: style.east,
-              south: style.south,
-              west: style.west,
-              needle: style.needle,
-              centerDot: style.centerDot,
-              info: style.ventoInfo,
-              velocidade: style.ventoVelocidade,
-              velocidadeSmall: style.ventoVelocidadeSmall,
+              container: style.tituloContainer,
+              temp: style.temperaturaLocal,
+              title: style.titulo,
             }}
           />
-        )}
+
+          <SearchBar
+            cidade={cidade}
+            onCidadeChange={setCidade}
+            onSubmit={handleSubmit}
+            loading={loading}
+            erro={erro}
+            className={style.formBusca}
+            inputClassName={style.inputBusca}
+            buttonClassName={style.botaoBusca}
+          />
+
+          {weather && <WeatherInfo weather={weather} />}
+
+          {weather && (
+            <WindIndicator
+              deg={weather.windDeg ?? 0}
+              speed={weather.windSpeed ?? 0}
+              classes={{
+                container: style.ventoContainer,
+                compass: style.compass,
+                compassRing: style.compassRing,
+                compassLabels: style.compassLabels,
+                north: style.north,
+                east: style.east,
+                south: style.south,
+                west: style.west,
+                needle: style.needle,
+                centerDot: style.centerDot,
+                info: style.ventoInfo,
+                velocidade: style.ventoVelocidade,
+                velocidadeSmall: style.ventoVelocidadeSmall,
+              }}
+            />
+          )}
+        </div>
       </div>
     </div>
   )

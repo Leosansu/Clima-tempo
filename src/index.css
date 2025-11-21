@@ -1,3 +1,9 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500&display=swap');
+
+:root {
+  font-family: 'Roboto', sans-serif;
+}
+
 html, body, #root {
   height: 100%;
 }
@@ -5,10 +11,9 @@ html, body, #root {
 body {
   margin: 0; /* Remove a margem padrão do body */
   padding: 0; /* Remove o preenchimento padrão do body */
-  font-family: 'Calvin', sans-serif; /* Substitua 'Calvin' pelo nome correto da fonte */
+  font-family: 'Roboto', sans-serif; /* Substitua 'Calvin' pelo nome correto da fonte */
   font-size: 16px; /* Ajuste o tamanho conforme necessário */
 }
-
 
 a {
   color: #1244fb;

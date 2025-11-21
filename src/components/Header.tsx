@@ -4,20 +4,26 @@ interface HeaderProps {
   modoNoite: boolean
   alternarModoNoite: () => void
   cidade?: string
+  pais?: string
   hora?: string
   data?: string
 }
 
-export default function Header({ modoNoite, alternarModoNoite, cidade, hora, data }: HeaderProps) {
+export default function Header({ modoNoite, alternarModoNoite, cidade, pais, hora, data }: HeaderProps) {
   return (
     <div className={style.headerContainer}>
       <header className={style.header}>
         <div className={style.infoCidade}>
           <div className={style.cidadeBloco}>
-            {cidade && <span className={style.cidade}>{cidade}</span>}
-            {data && <span className={style.data}>, {data}</span>}
+            {cidade && (
+              <span className={style.cidade}>
+                {cidade}
+                {pais ? `, ${pais}` : ''}
+              </span>
+            )}
+            {data && <span className={style.data}> — {data}</span>}
           </div>
-          {hora && <span className={style.hora}>, {hora}</span>}
+          {hora && <span className={style.hora}> — {hora}</span>}
         </div>
 
         <button

@@ -18,6 +18,7 @@ export default function useWeather() {
   const [erro, setErro] = useState('')
   const [horaCidade, setHoraCidade] = useState('')
   const [dataCidade, setDataCidade] = useState('')
+  const [pais, setPais] = useState<string | undefined>()
 
   const buscarClima = async (cidade: string) => {
     setWeather(null)
@@ -38,6 +39,7 @@ export default function useWeather() {
         return
       }
       const { lat, lon, name: resolvedName, country: resolvedCountry } = geoData[0]
+      setPais(resolvedCountry)
 
       // 2) Weather
       const weatherResp = await fetch(
@@ -90,5 +92,5 @@ export default function useWeather() {
     }
   }
 
-  return { weather, loading, erro, horaCidade, dataCidade, buscarClima }
+  return { weather, loading, erro, horaCidade, dataCidade, buscarClima, pais }
 }

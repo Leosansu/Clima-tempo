@@ -1,287 +1,347 @@
-.titulo {
-  text-align: center;
-  margin-top: 20px;
-  color: var(--text);
+.titulo { /* classe que estiliza o título principal */
+  
+  /* tamanho responsivo entre 1.5rem e 3.0rem */
+  
+  text-align: center; /* centraliza o texto horizontalmente */
+  margin-top: 20px; /* afasta o título do elemento superior em 20px */
+  color: var(--text); /* usa a cor de texto definida no tema (modo dia/noite) */
+  font-size: clamp(1.1rem, 4.5vw, 1.5rem); 
+  /* grossura da fonte: use um valor numérico (100-900) ou keywords (normal, bold) */
+  font-weight: 600; /* exemplo: semi-bold */
+  /* se estiver usando uma variable font, ajuste também o eixo 'wght' */
+  font-variation-settings: 'wght' 400;
+  
 }
 
-.tituloContainer {
-  display: flex;
-  align-items: center;
-  justify-content: center; /* centraliza horizontalmente junto com o título */
-  gap: 12px; /* espaço entre temperatura e título */
-  margin-top: 16px;
+.tituloContainer { /* contêiner que agrupa título e temperatura */
+  
+  font-size: clamp(0.8rem, 2.6vw, 1.rem); /* ajusta o tamanho da fonte conforme a largura da tela */
+  line-height: 1.05; /* define altura da linha para manter proximidade do texto */
+  transition: font-size 160ms ease; /* anima mudanças no tamanho da fonte suavemente */
+  display: flex; /* usa flexbox para alinhar elementos internos */
+  align-items: center; /* centraliza verticalmente os itens do contêiner */
+  justify-content: center; /* centraliza horizontalmente os itens */
+  gap: 12px; /* espaçamento entre temperatura e título */
+  margin-top: 16px; /* afasta o bloco do elemento acima em 16px */
+  font-weight: 200;
 }
 
-.temperaturaLocal {
-  font-size: 2.45rem; /* ajuste conforme desejar */
-  font-weight: 300; /* valor mais fino: 300 ou 400 */
-  color: var(--text);
+.temperaturaLocal { /* estilo da temperatura destacada */
+  font-size: clamp(2.0rem, 2.6vw, 2.8rem); /* torna a fonte responsiva conforme a largura da tela */
+  font-weight: 400; /* define peso de fonte mais fino para a temperatura */
+  color: var(--text); /* utiliza a cor do tema atual */
 }
 
 /* Modo Dia */
-.modoDia {
-  /* theme tokens */
-  --bg: #ffffff;
-  --text: #333333;
-  --header-bg: #007bff;
-  --link: #ffffff;
-  --toggle-bg: rgba(57, 217, 242, 0.5);
-  --toggle-knob-bg: rgba(255, 255, 255, 0.5);
-  --toggle-active-bg: rgb(31, 53, 98);
-  --toggle-active-knob-border: #000000;
-
-  background-color: var(--bg);
-  color: var(--text);
+.modoDia { /* classe aplicada quando o modo dia está ativo */
+  --bg: #ffffff; /* cor de fundo principal do modo dia */
+  --text: #333333; /* cor padrão do texto no modo dia */
+  --header-bg: #007bff; /* cor da faixa do cabeçalho */
+  --link: #ffffff; /* cor dos links no modo dia */
+  --toggle-bg: rgba(57, 217, 242, 0.5); /* cor do switch dia/noite (fundo) */
+  --toggle-knob-bg: rgba(255, 255, 255, 0.5); /* cor do knob do switch */
+  --toggle-active-bg: rgb(31, 53, 98); /* cor do background do switch ativo */
+  --toggle-active-knob-border: #000000; /* cor da borda do knob quando ativo */
+  background-color: var(--bg); /* aplica a cor de fundo configurada */
+  color: var(--text); /* aplica a cor de texto configurada */
 }
 
 /* Modo Noite */
-.modoNoite {
-  /* theme tokens */
-  --bg: #1a1a2e;
-  --text: #eaeaea;
-  --header-bg: #16213e;
-  --link: #eaeaea;
-  --toggle-bg: rgba(57, 217, 242, 0.3);
-  --toggle-knob-bg: rgba(255, 255, 255, 0.5);
-  --toggle-active-bg: rgb(31, 53, 98);
-  --toggle-active-knob-border: #000000;
-
-  background-color: var(--bg);
-  color: var(--text);
+.modoNoite { /* classe aplicada quando o modo noite está ativo */
+  --bg: #1a1a2e; /* cor de fundo no modo noite */
+  --text: #eaeaea; /* cor do texto no modo noite */
+  --header-bg: #16213e; /* cor da faixa do cabeçalho no modo noite */
+  --link: #eaeaea; /* cor dos links no modo noite */
+  --toggle-bg: rgba(57, 217, 242, 0.3); /* cor do switch (fundo) no modo noite */
+  --toggle-knob-bg: rgba(255, 255, 255, 0.5); /* cor do knob do switch */
+  --toggle-active-bg: rgb(31, 53, 98); /* cor do switch ativo */
+  --toggle-active-knob-border: #000000; /* borda do knob ativo */
+  background-color: var(--bg); /* aplica o fundo escuro */
+  color: var(--text); /* aplica a cor clara do texto */
 }
 
-.formBusca {
-  display: flex;
-  justify-content: center;
-  gap: 8px;
-  margin: 20px 0;
+.formBusca { /* contêiner do formulário de busca */
+  
+  display: flex; /* utiliza flexbox para organizar input e botão */
+  justify-content: center; /* centraliza os elementos horizontalmente */
+  gap: 8px; /* define espaçamento entre input e botão */
+  margin: 20px 0; /* adiciona margem vertical acima e abaixo */
 }
 
-.inputBusca {
-  padding: 8px;
-  border-radius: 18px;
-  border: 1px solid #ccc;
-  min-width: 200px;
-}
-.inputBusca:focus {
-  outline: none; /* Remove o contorno padrão, se desejar */
-  border-color: #007bff; /* Cor da borda ao focar/clicar */
-  box-shadow: 0 0 0 2px rgba(0,123,255,0.2); /* Opcional: efeito de brilho */
-}
-
-.botaoBusca {
-  padding: 8px 16px;
-  border-radius: 8px;
-  border: none;
-  background: #007bff;
-  color: #fff;
-  cursor: pointer;
-  font-weight: bold;
-  transition: background 0.2s;
-  width: 110px; 
+.inputBusca { /* estilo do campo de entrada da cidade */
+  
+  width: clamp(1.05rem, 45vw, 190px);
+  max-width: 100%;
+  box-sizing: border-box;
+  font-size: clamp(0.9rem, 1.8vw, 1.05rem);
+  transition: width 160ms ease, font-size 160ms ease;
+  padding: 8px; /* adiciona espaçamento interno para conforto */
+  margin-right: clamp(8px, 3vw, 24px); /* margem direita responsiva tradicional */
+  margin-inline-end: clamp(8px, 3vw, 24px); /* margem adaptada para layouts LTR/RTL */
+  border-radius: 18px; /* deixa bordas arredondadas */
+  border: 1px solid #ccc; /* define borda cinza clara */
+  min-width: 140px; /* garante largura mínima para o input */
 }
 
-.botaoBusca:hover {
-  background: #0056b3;
+.inputBusca:focus { /* estado de foco do campo de texto */
+  outline: none; /* remove outline padrão do navegador */
+  border-color: #007bff; /* muda cor da borda ao focar */
+  box-shadow: 0 0 0 2px rgba(0,123,255,0.2); /* adiciona brilho azul ao redor */
 }
 
-@media (max-width: 500px) {
-  .formBusca {
-    flex-direction: column;
-    align-items: center; /* Alinha ao centro e não estica */
-    gap: 8px;
+.botaoBusca { /* estilo do botão de buscar */
+  padding: 8px 16px; /* define espaçamento interno vertical/horizontal */
+  border-radius: 8px; /* arredonda as bordas do botão */
+  border: none; /* remove borda padrão */
+  background: #007bff; /* define cor azul de fundo */
+  color: #fff; /* texto branco */
+  cursor: pointer; /* mostra cursor de clique */
+  font-weight: bold; /* deixa fonte em negrito */
+  transition: background 0.2s; /* suaviza mudança de cor no hover */
+  width: 80px; /* largura fixa para padronizar formato */
+}
+
+.botaoBusca:hover { /* estado ao passar o mouse no botão */
+  background: #0056b3; /* escurece o azul no hover */
+}
+
+@media (max-width: 500px) { /* regras para telas até 500px */
+  .formBusca { /* ajusta o formulário em dispositivos pequenos */
+    flex-direction: column; /* coloca input e botão em coluna */
+    align-items: center; /* centraliza elementos */
+    gap: 8px; /* mantém o espaçamento vertical */
   }
-  .botaoBusca {
-    width: auto;      /* Garante que o botão não ocupe toda a largura */
-    min-width: 70px; /* Opcional: define um tamanho mínimo */
-    align-self: center; /* Centraliza o botão */
+  .botaoBusca { /* ajustes específicos do botão em telas pequenas */
+    width: auto; /* permite que a largura se ajuste ao conteúdo */
+    min-width: 70px; /* garante largura mínima confortável */
+    align-self: center; /* mantém o botão centralizado */
   }
 }
 
-/* App.module.css */
-.infoClima {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  margin-top: 24px;
-  gap: 6px;
+.infoClima { /* seção que exibe dados detalhados do clima */
+  display: flex; /* usa flexbox para organizar os textos */
+  flex-direction: column; /* organiza os parágrafos em coluna */
+  align-items: center; /* centraliza os parágrafos */
+  justify-content: center; /* centraliza verticalmente */
+  margin-top: 24px; /* afasta o bloco do conteúdo acima */
+  gap: 6px; /* espaçamento entre linhas de informação */
 }
 
-.infoClima p {
-  margin: 0.15em 0;
+.infoClima p { /* estilo para cada linha de informação */
+  margin: 0.15em 0; /* define margem vertical pequena para separação */
 }
 
-/* fundos por condição (imagens em public/images/) */
-.bg_sunny {
-  background-image: url('/images/sunny.jpg');
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
+.bg_sunny { /* fundo para condição ensolarada */
+  background-image: url('/images/sunny.jpg'); /* imagem usada para dias ensolarados */
+  background-size: cover; /* cobre todo o contêiner */
+  background-position: center; /* centraliza a imagem */
+  background-repeat: no-repeat; /* evita repetição da imagem */
 }
 
-.bg_clouds {
-  background-image: url('/images/clouds.jpg');
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
+.bg_clouds { /* fundo para nuvens dispersas/algumas nuvens */
+  background-image: url('/images/clouds.jpg'); /* imagem associada a nuvens */
+  background-size: cover; /* ajusta a imagem para cobrir o fundo */
+  background-position: center; /* centraliza a imagem */
+  background-repeat: no-repeat; /* impede repetição */
 }
 
-.bg_rain {
-  background-image: url('/images/rain.jpg');
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
+.bg_rain { /* fundo para chuva */
+  background-image: url('/images/rain.jpg'); /* imagem de chuva */
+  background-size: cover; /* cobre todo o fundo */
+  background-position: center; /* centraliza a imagem */
+  background-repeat: no-repeat; /* evita repetição */
 }
 
-.bg_thunder {
-  background-image: url('/images/thunder.jpg');
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
+.bg_thunder { /* fundo para trovoadas */
+  background-image: url('/images/thunder.jpg'); /* imagem com relâmpagos */
+  background-size: cover; /* cobre o contêiner */
+  background-position: center; /* centraliza */
+  background-repeat: no-repeat; /* sem repetição */
 }
 
-.bg_snow {
-  background-image: url('/images/snow.jpg');
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
+.bg_snow { /* fundo para neve */
+  background-image: url('/images/snow.jpg'); /* imagem com neve */
+  background-size: cover; /* amplia para cobrir tudo */
+  background-position: center; /* centraliza a imagem */
+  background-repeat: no-repeat; /* não repete */
 }
 
-.bg_drizzle {
-  background-image: url('/images/drizzle.jpg'); /* imagem para "nublado" conforme solicitado */
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
+.bg_drizzle { /* fundo para garoa / nublado */
+  background-image: url('/images/drizzle.jpg'); /* imagem solicitada para nublado */
+  background-size: cover; /* cobre o contêiner */
+  background-position: center; /* centraliza */
+  background-repeat: no-repeat; /* evita repetição */
 }
 
-.bg_fog {
-  background-image: url('/images/fog.jpg'); /* confirme o nome do arquivo */
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
+.bg_fog { /* fundo para névoa/neblina */
+  background-image: url('/images/fog.jpg'); /* imagem de neblina */
+  background-size: cover; /* cobre o contêiner */
+  background-position: center; /* centraliza */
+  background-repeat: no-repeat; /* não repete */
 }
 
-/* garante que o container ocupa a tela inteira para mostrar a imagem */
-.modoDia, .modoNoite {
-  min-height: 100vh;
-  position: relative;
+.modoDia,
+.modoNoite { /* estilos compartilhados para modos dia e noite */
+  min-height: 100vh; /* garante altura mínima de tela inteira */
+  position: relative; /* permite uso de pseudo-elementos posicionados */
 }
 
-/* camada escura opcional para legibilidade do texto sobre imagens no modo dia */
-.modoDia::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background: rgba(0,0,0,0.15); /* ajuste opacidade se precisar */
-  pointer-events: none;
+.modoDia::before { /* camada de overlay no modo dia */
+  content: ''; /* gera elemento vazio para overlay */
+  position: absolute; /* posiciona sobre todo o contêiner */
+  inset: 0; /* estende do topo à base, esquerda à direita */
+  background: rgba(0,0,0,0.15); /* aplica leve escurecimento para legibilidade */
+  pointer-events: none; /* evita interferência com cliques */
 }
 
-/* opcional: camada escura para legibilidade (útil no modo noite) */
 .modoNoite::before,
-.bg_overlay::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background: rgba(0,0,0,0.35);
-  pointer-events: none;
+.bg_overlay::before { /* camada escura para modo noite e overlays */
+  content: ''; /* cria elemento overlay */
+  position: absolute; /* posiciona sobre o contêiner */
+  inset: 0; /* ocupa toda a área */
+  background: rgba(0,0,0,0.35); /* escurece mais para contraste */
+  pointer-events: none; /* não interfere em interações */
 }
 
-/* garanta que o container principal permita o background e não esconda conteúdo */
-:global(body) {
-  margin: 0;
-}
-.modoDia, .modoNoite {
-  position: relative;
-  min-height: 100vh;
-  background-color: var(--bg, #fff); /* fallback */
-  display: flex;             /* permite centralizar o conteúdo principal */
-  flex-direction: column;    /* mantém Header no topo */
+:global(body) { /* redefine estilo global do body */
+  margin: 0; /* remove margem padrão do navegador */
 }
 
-.main {
-  flex: 1;                   /* ocupa o espaço restante abaixo do Header */
+.modoDia,
+.modoNoite { /* reaproveita definição para garantir layout flex */
+  position: relative; /* mantém base para overlays */
+  min-height: 100vh; /* altura mínima de tela */
+  background-color: var(--bg, #fff); /* fallback para cor de fundo */
+  display: flex; /* usa flexbox no layout principal */
+  flex-direction: column; /* mantém cabeçalho no topo e conteúdo abaixo */
+}
+
+.main { /* área principal abaixo do cabeçalho */
+  flex: 1; /* ocupa todo espaço disponível restante */
+  display: flex; /* habilita flexbox internamente */
+  flex-direction: column; /* organiza conteúdo em coluna */
+  justify-content: center; /* centraliza verticalmente */
+  align-items: center; /* centraliza horizontalmente */
+}
+
+.ventoContainer { /* contêiner da bússola/indicador de vento */
+  display: flex; /* usa flexbox para agrupamento */
+  align-items: center; /* alinha itens verticalmente */
+  justify-content: center; /* centraliza horizontalmente */
+  gap: 12px; /* espaçamento entre bússola e textos */
+  margin-top: 8px; /* distância do conteúdo superior */
+}
+
+.compass { /* estilo da bússola */
+  width: 70px; /* largura padrão da bússola */
+  height: 70px; /* altura igual à largura para círculo perfeito */
+  border-radius: 50%; /* forma circular */
+  position: relative; /* base para elementos posicionados internamente */
+  display: flex; /* flex para centralizar agulha/ponto */
+  align-items: center; /* centraliza verticalmente */
+  justify-content: center; /* centraliza horizontalmente */
+  background: rgba(255,255,255,0.06); /* fundo translúcido */
+  box-shadow: 0 2px 6px rgba(0,0,0,0.15), inset 0 0 0 1px rgba(255,255,255,0.03); /* sombras externa e interna */
+}
+
+.compassRing { /* anel interno da bússola */
+  position: absolute; /* posiciona dentro da bússola */
+  inset: 6px; /* cria margem interna uniforme */
+  border-radius: 50%; /* mantém forma circular */
+  border: 2px solid rgba(255,255,255,0.06); /* define borda suave */
+  pointer-events: none; /* não interfere em cliques */
+}
+
+.compassLabels { /* contêiner dos rótulos N/E/S/W */
+  position: absolute; /* posiciona sobre a bússola */
+  inset: 0; /* ocupa toda a área da bússola */
+  display: block; /* garante elemento de bloco */
+  pointer-events: none; /* evita interação acidental */
+  color: var(--text, #222); /* usa cor de texto atual */
+  font-weight: 700; /* deixa os rótulos em negrito */
+  font-size: 0.7rem; /* tamanho reduzido */
+}
+
+.compassLabels .north { /* posiciona letra N */
+  position: absolute; /* posiciona relativo ao contêiner */
+  top: 4px; /* distancia do topo */
+  left: 50%; /* posiciona no centro horizontal */
+  transform: translateX(-50%); /* corrige alinhamento central */
+}
+
+.compassLabels .east { /* posiciona letra E */
+  position: absolute; /* posicionamento manual */
+  right: 4px; /* distancia da direita */
+  top: 50%; /* centro vertical */
+  transform: translateY(-50%); /* centraliza verticalmente */
+}
+
+.compassLabels .south { /* posiciona letra S */
+  position: absolute; /* posicionamento manual */
+  bottom: 4px; /* distancia da base */
+  left: 50%; /* centro horizontal */
+  transform: translateX(-50%); /* ajusta alinhamento horizontal */
+}
+
+.compassLabels .west { /* posiciona letra W */
+  position: absolute; /* posicionamento manual */
+  left: 4px; /* distancia da esquerda */
+  top: 50%; /* centro vertical */
+  transform: translateY(-50%); /* centraliza verticalmente */
+}
+
+.needle { /* agulha que indica direção do vento */
+  width: 3px; /* largura fina da agulha */
+  height: 30px; /* comprimento da agulha */
+  background: #ff3384; /* cor rosa para destaque */
+  position: absolute; /* posiciona dentro da bússola */
+  top: 8px; /* desloca para cima para apontar */
+  left: 50%; /* centraliza horizontalmente */
+  transform-origin: 50% 70%; /* define ponto de rotação para girar corretamente */
+  border-radius: 2px; /* arredonda as bordas */
+  transition: transform 0.35s ease; /* anima a rotação */
+  box-shadow: 0 1px 2px rgba(0,0,0,0.25); /* adiciona leve sombra */
+}
+
+.centerDot { /* ponto central da bússola */
+  width: 8px; /* largura do ponto central */
+  height: 8px; /* altura igual para formar círculo */
+  border-radius: 50%; /* forma circular */
+  background: var(--text, #222); /* cor seguindo o tema */
+  position: absolute; /* posiciona no centro da bússola */
+  left: 50%; /* centraliza horizontalmente */
+  top: 50%; /* centraliza verticalmente */
+  transform: translate(-50%, -50%); /* ajusta centro exato */
+  box-shadow: 0 1px 2px rgba(0,0,0,0.2); /* adiciona sombra suave */
+}
+
+@media (max-width: 420px) { /* ajustes para telas muito pequenas */
+  .compass { /* reduz tamanho da bússola */
+    width: 58px; /* largura menor */
+    height: 58px; /* altura menor */
+  }
+  .needle { /* ajusta agulha para o novo tamanho */
+    height: 24px; /* comprimento reduzido */
+    width: 2.5px; /* largura ligeiramente menor */
+    top: 6px; /* reposiciona topo */
+  }
+  .centerDot { /* reduz ponto central */
+    width: 6px; /* largura menor */
+    height: 6px; /* altura menor */
+  }
+}
+
+.infoWrapper {
+  width: min(90vw, 300px);
+  background: rgba(255, 255, 255, 0.25);
+  backdrop-filter: blur(6px);
+  border-radius: 16px;
+  padding: 24px clamp(16px, 4vw, 32px);
   display: flex;
   flex-direction: column;
-  justify-content: center;   /* centraliza verticalmente */
-  align-items: center;       /* centraliza horizontalmente */
-}
-
-.ventoContainer {
-  display: flex;
   align-items: center;
-  justify-content: center;
-  gap: 12px;
-  margin-top: 8px;
-}
-
-/* círculo da bússola */
-.compass {
-  width: 70px;                 /* tamanho do "relógio" */
-  height: 70px;
-  border-radius: 50%;
-  position: relative;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: rgba(255,255,255,0.06);
-  box-shadow: 0 2px 6px rgba(0,0,0,0.15), inset 0 0 0 1px rgba(255,255,255,0.03);
-}
-
-/* anel - opcional para destacar borda */
-.compassRing {
-  position: absolute;
-  inset: 6px;
-  border-radius: 50%;
-  border: 2px solid rgba(255,255,255,0.06);
-  pointer-events: none;
-}
-
-/* rótulos N E S W */
-.compassLabels {
-  position: absolute;
-  inset: 0;
-  display: block;
-  pointer-events: none;
-  color: var(--text, #222);
-  font-weight: 700;
-  font-size: 0.7rem;
-}
-.compassLabels .north { position: absolute; top: 4px; left: 50%; transform: translateX(-50%); }
-.compassLabels .east  { position: absolute; right: 4px; top: 50%; transform: translateY(-50%); }
-.compassLabels .south { position: absolute; bottom: 4px; left: 50%; transform: translateX(-50%); }
-.compassLabels .west  { position: absolute; left: 4px; top: 50%; transform: translateY(-50%); }
-
-/* agulha apontando para direção do vento */
-.needle {
-  width: 3px;
-  height: 30px;
-  background: #ff3384;         /* cor rosa da agulha */
-  position: absolute;
-  top: 8px;                    /* posiciona ponta para cima */
-  left: 50%;
-  transform-origin: 50% 70%;   /* pivô para girar corretamente */
-  border-radius: 2px;
-  transition: transform 0.35s ease;
-  box-shadow: 0 1px 2px rgba(0,0,0,0.25);
-}
-
-/* ponto central para acabamento */
-.centerDot {
-  width: 8px;
-  height: 8px;
-  border-radius: 50%;
-  background: var(--text, #222);
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  transform: translate(-50%, -50%);
-  box-shadow: 0 1px 2px rgba(0,0,0,0.2);
-}
-
-/* adaptações responsivas */
-@media (max-width: 420px) {
-  .compass { width: 58px; height: 58px; }
-  .needle { height: 24px; width: 2.5px; top: 6px; }
-  .centerDot { width: 6px; height: 6px; }
+  gap: 20px;
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.15);
+  margin-top: 40px;
+  margin-bottom: 40px;
 }
